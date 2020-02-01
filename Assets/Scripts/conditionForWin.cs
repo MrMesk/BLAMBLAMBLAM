@@ -55,7 +55,4 @@ public class conditionForWin : MonoBehaviour
             inventory = null;
         }
     }
-
-
-
 }
