@@ -11,6 +11,7 @@ public class Player2Controleur : MonoBehaviour
 
     private int currentLifePoint;
     private bool isResponing;
+    private bool hasBeenSlowDown;
     void Start()
     {
         isResponing = false;
@@ -21,7 +22,12 @@ public class Player2Controleur : MonoBehaviour
     {
         if (isResponing)
         {
-            if (transform.position == respawnPosition)
+            if (transform.position.y <= respawnPosition.y + transform.localScale.y * 1 && !hasBeenSlowDown)
+            {
+                Rigidbody playerRigidbody = gameObject.GetComponent<Rigidbody>();
+                playerRigidbody.velocity = playerRigidbody.velocity * 0.05f;
+                hasBeenSlowDown = true;
+            } else if(transform.position == respawnPosition)
             {
                 isResponing = false;
             }
@@ -32,6 +38,7 @@ public class Player2Controleur : MonoBehaviour
     }
     public void respawn()
     {
+        hasBeenSlowDown = false;
         isResponing = true;
         PlayerInventory inventory = gameObject.GetComponent<PlayerInventory>();
         inventory.gainPickup(-inventory.getPickupCount());
