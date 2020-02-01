@@ -81,7 +81,7 @@ public class Player2Controleur : MonoBehaviour
         hasBeenSlowDown = false;
         isResponing = true;
         PlayerInventory inventory = gameObject.GetComponent<PlayerInventory>();
-        inventory.gainPickup(-inventory.getPickupCount());
+        inventory.GainPickup(-inventory.GetPickupCount());
         currentLifePoint = maxLifePoint;
         float estimatedHeight = (float)(0.5 * 9.81 * Mathf.Pow(respawnDelay, 2));
         transform.position = new Vector3(respawnPosition.x, respawnPosition.y + estimatedHeight, respawnPosition.z);

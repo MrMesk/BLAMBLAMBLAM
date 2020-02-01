@@ -1,22 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Pause : MonoBehaviour
 {
     public bool timepause = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-       
-    }
+    public string homePage;
 
     // Update is called once per frame
     void Update()
     {
-        GamePause(); 
+        GamePause();
     }
 
+    /// <summary>
+    /// Make the game to pause when we use the Key.
+    /// </summary>
     void GamePause()
     {
         if (Input.GetKeyDown(KeyCode.P))
@@ -27,19 +24,23 @@ public class Pause : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Manage the UI.
+    /// </summary>
     private void OnGUI()
     {
         if (timepause)
         {
-           if(GUI.Button(new Rect(Screen.width / 2 - 40, Screen.height / 2 - 45, 160, 50), "Continuer")){
+            if (GUI.Button(new Rect(Screen.width / 2 - 40, Screen.height / 2 - 45, 160, 50), "Continuer"))
+            {
                 timepause = !timepause;
                 TimeStop.TimeStatus(timepause);
             }
 
-           if(GUI.Button(new Rect(Screen.width / 2 - 40, Screen.height / 2+5, 160, 50),"Retourner au menu"))
+            if (GUI.Button(new Rect(Screen.width / 2 - 40, Screen.height / 2 + 5, 160, 50), "Retourner au menu"))
             {
                 Application.Quit();
-                Application.LoadLevel("Main menu");
+                Application.LoadLevel(homePage);
             }
         }
     }

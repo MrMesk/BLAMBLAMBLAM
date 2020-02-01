@@ -421,6 +421,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+=======
+>>>>>>> master
 --- !u!1001 &17132339634214543
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -428,6 +433,7 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+<<<<<<< HEAD
     - target: {fileID: 17132340043157955, guid: af32085d28745f34d96af8239aaa1465,
         type: 3}
       propertyPath: groundLayer.m_Bits
@@ -443,6 +449,8 @@ PrefabInstance:
       propertyPath: groundDistance
       value: 20
       objectReference: {fileID: 0}
+=======
+>>>>>>> master
     - target: {fileID: 17132340043157956, guid: af32085d28745f34d96af8239aaa1465,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -505,3 +513,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af32085d28745f34d96af8239aaa1465, type: 3}
+<<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
+>>>>>>> master

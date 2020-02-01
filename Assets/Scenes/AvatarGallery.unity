@@ -354,13 +354,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf96842e8614ec4081f27071bf7cf8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD:Assets/Scenes/AvatarGallery.unity
   appliedForceOnHit: 50000
   spawnedFX: {fileID: 1075539248683162402, guid: 07eb10debd91b2546adbf0b3fe4e92a9,
+=======
+  appliedForceOnHit: 5
+  spawnedFX: {fileID: 1075539248683162402, guid: 40a9311c501303f45a6d9bfabe7a9b00,
+>>>>>>> master:Assets/Oculus/Avatar/Samples/AvatarGallery/AvatarGallery.unity
     type: 3}
   distanceOffset: 0.5
   platformLayerMask:
     serializedVersion: 2
+<<<<<<< HEAD:Assets/Scenes/AvatarGallery.unity
     m_Bits: 1
+=======
+    m_Bits: 0
+>>>>>>> master:Assets/Oculus/Avatar/Samples/AvatarGallery/AvatarGallery.unity
 --- !u!1 &219780717 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 126d619cf4daa52469682f85c1378b4a,
@@ -888,13 +897,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf96842e8614ec4081f27071bf7cf8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD:Assets/Scenes/AvatarGallery.unity
   appliedForceOnHit: 50000
   spawnedFX: {fileID: 1075539248683162402, guid: 07eb10debd91b2546adbf0b3fe4e92a9,
+=======
+  appliedForceOnHit: 5
+  spawnedFX: {fileID: 1075539248683162402, guid: 40a9311c501303f45a6d9bfabe7a9b00,
+>>>>>>> master:Assets/Oculus/Avatar/Samples/AvatarGallery/AvatarGallery.unity
     type: 3}
   distanceOffset: 0.5
   platformLayerMask:
     serializedVersion: 2
+<<<<<<< HEAD:Assets/Scenes/AvatarGallery.unity
     m_Bits: 1
+=======
+    m_Bits: 0
+>>>>>>> master:Assets/Oculus/Avatar/Samples/AvatarGallery/AvatarGallery.unity
 --- !u!1001 &804141625
 PrefabInstance:
   m_ObjectHideFlags: 0
