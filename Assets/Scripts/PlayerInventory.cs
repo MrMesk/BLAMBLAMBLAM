@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInventory 
+public class PlayerInventory : MonoBehaviour
 {
     private int pickupCount = 0;
     public int getPickupCount()
