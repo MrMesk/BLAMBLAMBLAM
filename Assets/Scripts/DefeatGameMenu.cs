@@ -6,22 +6,21 @@ public class DefeatGameMenu : MonoBehaviour
 {
    
     private float timer;
-    private Clock clock= new Clock();
     public GameObject menu;
     private bool isEnd;
+    public GameObject player;
 
     // Start is called before the first frame update
 
     private void Update()
     {
-        clock.timerDecrementation();
-        Debug.Log(clock.timer);
+       
         activeMenu();
     }
 
     public void activeMenu()
     {
-        timer = clock.timer;
+        timer = player.GetComponent<Clock>().timer;
         menu.SetActive(isEnd);
         if (timer <= 0)
         {
