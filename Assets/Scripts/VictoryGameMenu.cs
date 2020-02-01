@@ -11,7 +11,9 @@ public class VictoryGameMenu : MonoBehaviour
     public Collider constructZone;
     public GameObject player;
     private PlayerInventory inventory;
-    private float timer; 
+    private float timer;
+    public string nextlevel;
+    public string homePage;
 
     // Start is called before the first frame update
     void Start()
@@ -53,18 +55,23 @@ public class VictoryGameMenu : MonoBehaviour
         }
     }
 
+    public int GetNbPickupOjective()
+    {
+        return nbPickupOjective;
+    }
+
     private void OnGUI()
     {
         if (nbPickupFinal == nbPickupOjective && timer>0)
         {
-            GUI.Box(new Rect(Screen.width / 2 - 60, Screen.height / 2 - 120, 180, 250), "Victory");
-            if (GUI.Button(new Rect(Screen.width / 2 - 50, Screen.height / 2 - 50, 160, 50), "Next Level"))
+            GUI.Box(new Rect(Screen.width / 2 - 60, Screen.height / 2 - 120, 180, 250), "Victoire");
+            if (GUI.Button(new Rect(Screen.width / 2 - 50, Screen.height / 2 - 50, 160, 50), "Niveau suivant"))
             {
-                Application.LoadLevel("level1");
+                Application.LoadLevel(nextlevel);
             }
             if (GUI.Button(new Rect(Screen.width / 2 - 50, Screen.height / 2 + 10, 160, 50), "Retour au menu principal"))
             {
-                Application.LoadLevel("Main menu");
+                Application.LoadLevel(homePage);
             }
         }
     }

@@ -9,6 +9,8 @@ public class DefeatGameMenu : MonoBehaviour
     public GameObject menu;
     private bool isEnd;
     public GameObject player;
+    public string level;
+    public string homePage;
 
     // Start is called before the first frame update
 
@@ -38,14 +40,14 @@ public class DefeatGameMenu : MonoBehaviour
     {
         if (timer <= 0)
         {
-            GUI.Box(new Rect(Screen.width / 2 - 60, Screen.height / 2 - 120, 180, 250), "Defeat");
-            if (GUI.Button(new Rect(Screen.width / 2 - 50, Screen.height / 2-50, 160, 50), "Retry"))
+            GUI.Box(new Rect(Screen.width / 2 - 60, Screen.height / 2 - 120, 180, 250), "Défaite");
+            if (GUI.Button(new Rect(Screen.width / 2 - 50, Screen.height / 2-50, 160, 50), "Réessayer"))
             {
-                Application.LoadLevel("level1");
+                Application.LoadLevel(level);
             }
             if (GUI.Button(new Rect(Screen.width / 2 - 50, Screen.height / 2 + 10, 160, 50), "Retour au menu principal"))
             {
-                Application.LoadLevel("Main menu");
+                Application.LoadLevel(homePage);
             }
         }
     }
