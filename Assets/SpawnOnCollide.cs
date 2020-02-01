@@ -22,11 +22,16 @@ public class SpawnOnCollide : MonoBehaviour
 
 	void OnCollisionEnter (Collision collision)
 	{
-		GameObject fx = Instantiate(spawnedFX, collision.contacts[0].point, transform.rotation);
-		Destroy(fx, 5f);
+	
 	}
 
-	void OnTriggerEnter(Collider other)
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + transform.up * distanceOffset);
+    }
+
+    void OnTriggerEnter(Collider other)
 	{
 		Debug.Log("Trigger enter !");
 		RaycastHit hit;
@@ -35,8 +40,13 @@ public class SpawnOnCollide : MonoBehaviour
 		{
 			Rigidbody r = hit.collider.attachedRigidbody;
 
+            r.angularVelocity = Vector3.zero;
+
 			Debug.Log("Raycast hit !");
 			r.AddForceAtPosition(transform.up * -1f * appliedForceOnHit, hit.point);
-		}
+
+            GameObject fx = Instantiate(spawnedFX, hit.point, transform.rotation);
+            Destroy(fx, 5f);
+        }
 	}
 }
