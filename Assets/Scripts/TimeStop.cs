@@ -4,7 +4,10 @@ using UnityEngine;
 
 public static class TimeStop
 {
-    // Start is called before the first frame update
+   /// <summary>
+   /// Manage the pause.
+   /// </summary>
+   /// <param name="timePause"></param>
     public static void TimeStatus(bool timePause)
     {
         if (timePause)

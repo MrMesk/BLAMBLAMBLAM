@@ -9,15 +9,20 @@ public class Clock :MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timerDecrementation();
+        TimerDecrementation();
     }
 
-
-    public void timerDecrementation()
+    /// <summary>
+    /// Decrement the timer
+    /// </summary>
+    public void TimerDecrementation()
     {
         timer -= Time.deltaTime;
     }
 
+    /// <summary>
+    /// Manage the UI.
+    /// </summary>
     private void OnGUI()
     {
         GUI.Box(new Rect(0, 0, 30, 30), ((int)timer).ToString());

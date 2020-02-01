@@ -21,22 +21,31 @@ public class VictoryGameMenu : MonoBehaviour
         nbPickupOjective = 0;
     }
 
+    // Update is called once per frame
     private void Update()
     {
         
-        endOfTheGame();
+        GiveToObjective();
     }
-    // Update is called once per frame
-    private void endOfTheGame()
+    
+    /// <summary>
+    /// Give Pickups to objective
+    /// </summary>
+    private void GiveToObjective()
     {
         timer = player.GetComponent<Clock>().timer;
         if (trigger)
         {
-            nbPickupOjective += inventory.getPickupCount();
-            inventory.gainPickup(-inventory.getPickupCount());
+            nbPickupOjective += inventory.GetPickupCount();
+            inventory.GainPickup(-inventory.GetPickupCount());
         }
     }
 
+
+    /// <summary>
+    /// Manage where we can give Pickups to Objective
+    /// </summary>
+    /// <param name="other">The objects who enter on the trigger</param>
     private void OnTriggerEnter(Collider other)
     {
         inventory = other.GetComponent<PlayerInventory>();
@@ -46,6 +55,10 @@ public class VictoryGameMenu : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Manage where we can't give Pickups to Objective
+    /// </summary>
+    /// <param name="other">The objects who enter on the trigger</param>
     private void OnTriggerExit(Collider other)
     {
         if (other.GetComponent<PlayerInventory>() != null)
@@ -55,11 +68,18 @@ public class VictoryGameMenu : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Cast the nbPickupOjective private variable 
+    /// </summary>
+    /// <returns>The number of Pickup of the objective</returns>
     public int GetNbPickupOjective()
     {
         return nbPickupOjective;
     }
 
+    /// <summary>
+    /// Manage the UI
+    /// </summary>
     private void OnGUI()
     {
         if (nbPickupFinal == nbPickupOjective && timer>0)

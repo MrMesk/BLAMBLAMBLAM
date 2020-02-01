@@ -5,11 +5,6 @@ using UnityEngine;
 public class Pause : MonoBehaviour
 {
     public bool timepause = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-       
-    }
 
     // Update is called once per frame
     void Update()
@@ -17,6 +12,9 @@ public class Pause : MonoBehaviour
         GamePause(); 
     }
 
+    /// <summary>
+    /// Make the game to pause when we use the Key.
+    /// </summary>
     void GamePause()
     {
         if (Input.GetKeyDown(KeyCode.P))
@@ -27,6 +25,9 @@ public class Pause : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Manage the UI.
+    /// </summary>
     private void OnGUI()
     {
         if (timepause)
