@@ -5,12 +5,12 @@ using UnityEngine;
 public class PlayerInventory : MonoBehaviour
 {
     private int pickupCount = 0;
-    public int getPickupCount()
+    public int GetPickupCount()
     {
         return pickupCount;
     }
 
-    public void gainPickup(int pickupGain)
+    public void GainPickup(int pickupGain)
     {
         pickupCount += pickupGain;
         if (pickupCount < 0)

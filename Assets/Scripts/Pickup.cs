@@ -10,7 +10,7 @@ public class Pickup : MonoBehaviour
         PlayerInventory inventory = other.GetComponent<PlayerInventory>();
         if(inventory != null)
         {
-            inventory.gainPickup(value);
+            inventory.GainPickup(value);
             Destroy(gameObject);
         }
     }

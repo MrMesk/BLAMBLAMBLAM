@@ -17,10 +17,13 @@ public class DefeatGameMenu : MonoBehaviour
     private void Update()
     {
        
-        activeMenu();
+        ActiveMenu();
     }
 
-    public void activeMenu()
+    /// <summary>
+    /// Say if the timer is finish or not
+    /// </summary>
+    public void ActiveMenu()
     {
         timer = player.GetComponent<Clock>().timer;
         menu.SetActive(isEnd);
@@ -36,6 +39,9 @@ public class DefeatGameMenu : MonoBehaviour
        
     }
 
+    /// <summary>
+    /// Manage the UI.
+    /// </summary>
     private void OnGUI()
     {
         if (timer <= 0)
