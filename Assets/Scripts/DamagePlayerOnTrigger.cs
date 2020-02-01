@@ -27,7 +27,7 @@ public class DamagePlayerOnTrigger : MonoBehaviour
 			Player2Controleur c = player.GetComponent<Player2Controleur>();
 			if(c != null)
 			{
-				//c.DAMAGEASFUCK
+				c.takeDamage(damage);
 			}
 		}
 	}
