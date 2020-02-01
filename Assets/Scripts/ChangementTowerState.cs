@@ -5,6 +5,7 @@ public class ChangementTowerState : MonoBehaviour
 {
     public GameObject player;
     public int nbOfStates;
+
     private int multiplier;
     private int nbPickupObjective;
     private int nbPickupFinal;

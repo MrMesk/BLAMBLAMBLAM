@@ -5,15 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class VictoryGameMenu : MonoBehaviour
 {
-    public int nbPickupFinal = 10;
-    private int nbPickupOjective;
-    private bool trigger;
+    public int nbPickupFinal;   
     public Collider constructZone;
     public GameObject player;
+    
     private PlayerInventory inventory;
+    private int nbPickupOjective;
     private float timer;
     public string nextlevel;
     public string homePage;
+    private bool trigger;
 
     // Start is called before the first frame update
     void Start()

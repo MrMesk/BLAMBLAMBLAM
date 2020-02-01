@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public static class TimeStop
 {
-   /// <summary>
-   /// Manage the pause.
-   /// </summary>
-   /// <param name="timePause"></param>
+    /// <summary>
+    /// Manage the pause.
+    /// </summary>
+    /// <param name="timePause">The state of the time for test him</param>
     public static void TimeStatus(bool timePause)
     {
         if (timePause)
