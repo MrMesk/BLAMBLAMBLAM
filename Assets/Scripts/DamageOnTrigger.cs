@@ -2,23 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnOnCollide : MonoBehaviour
+public class DamageOnTrigger: MonoBehaviour
 {
 	public float appliedForceOnHit = 5f;
 	public GameObject spawnedFX;
 	public float distanceOffset = 0.5f;
 	public LayerMask platformLayerMask;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	public bool destroyOnImpact = false;
+   
 
 	void OnCollisionEnter (Collision collision)
 	{
@@ -30,13 +22,24 @@ public class SpawnOnCollide : MonoBehaviour
 	{
 		Debug.Log("Trigger enter !");
 		RaycastHit hit;
-
 		if(Physics.Raycast(transform.position + transform.up * distanceOffset, transform.up * -1f, out hit, distanceOffset * 4f, platformLayerMask))
 		{
 			Rigidbody r = hit.collider.attachedRigidbody;
 
+			PlatformLife life = other.GetComponent<PlatformLife>();
+
+			if(life)
+			{
+				life.ModifLifeValue(-1);
+			}
+
 			Debug.Log("Raycast hit !");
 			r.AddForceAtPosition(transform.up * -1f * appliedForceOnHit, hit.point);
+
+			if(destroyOnImpact)
+			{
+				Destroy(gameObject);
+			}
 		}
 	}
 }
