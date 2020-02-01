@@ -10,7 +10,7 @@ public class VictoryGameMenu : MonoBehaviour
     public GameObject player;
     
     private PlayerInventory inventory;
-    private int nbPickupOjective;
+    public int nbPickupOjective;
     private float timer;
     public string nextlevel;
     public string homePage;
@@ -78,6 +78,10 @@ public class VictoryGameMenu : MonoBehaviour
         return nbPickupOjective;
     }
 
+    public int GetNbPickupFinal()
+    {
+        return nbPickupFinal;
+    }
     /// <summary>
     /// Manage the UI
     /// </summary>
