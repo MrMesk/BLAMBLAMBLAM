@@ -5,7 +5,7 @@ using UnityEngine;
 public class Pickup : MonoBehaviour
 {
     public int value = 1;
-    public void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         PlayerInventory inventory = other.GetComponent<PlayerInventory>();
         if(inventory != null)
