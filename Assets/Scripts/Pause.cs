@@ -2,7 +2,7 @@
 
 public class Pause : MonoBehaviour
 {
-    public bool timepause = false;
+    public bool timePause = false;
     public string homePage;
 
     // Update is called once per frame
@@ -18,8 +18,8 @@ public class Pause : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            timepause = !timepause;
-            TimeStop.TimeStatus(timepause);
+            timePause = !timePause;
+            TimeStop.TimeStatus(timePause);
 
         }
     }
@@ -29,12 +29,12 @@ public class Pause : MonoBehaviour
     /// </summary>
     private void OnGUI()
     {
-        if (timepause)
+        if (timePause)
         {
             if (GUI.Button(new Rect(Screen.width / 2 - 40, Screen.height / 2 - 45, 160, 50), "Continuer"))
             {
-                timepause = !timepause;
-                TimeStop.TimeStatus(timepause);
+                timePause = !timePause;
+                TimeStop.TimeStatus(timePause);
             }
 
             if (GUI.Button(new Rect(Screen.width / 2 - 40, Screen.height / 2 + 5, 160, 50), "Retourner au menu"))
