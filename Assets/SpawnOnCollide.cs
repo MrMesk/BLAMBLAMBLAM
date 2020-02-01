@@ -28,12 +28,14 @@ public class SpawnOnCollide : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
+		Debug.Log("Trigger enter !");
 		RaycastHit hit;
 
-		if(Physics.Raycast(transform.position, transform.up * -1f + transform.up * distanceOffset, out hit, distanceOffset * -2f, platformLayerMask))
+		if(Physics.Raycast(transform.position + transform.up * distanceOffset, transform.up * -1f, out hit, distanceOffset * 4f, platformLayerMask))
 		{
 			Rigidbody r = hit.collider.attachedRigidbody;
 
+			Debug.Log("Raycast hit !");
 			r.AddForceAtPosition(transform.up * -1f * appliedForceOnHit, hit.point);
 		}
 	}
