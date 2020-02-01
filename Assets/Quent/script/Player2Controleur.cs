@@ -23,6 +23,11 @@ public class Player2Controleur : MonoBehaviour
     public LayerMask groundLayer;
     public ForceMode jumpType;
 
+    public ParticleSystem traineeParticule;
+    public float multiplieurRate;
+    public float miniRate;
+    bool isGrounded;
+
     private int currentLifePoint;
     private bool isResponing;
     private bool hasBeenSlowDown;
@@ -39,13 +44,14 @@ public class Player2Controleur : MonoBehaviour
 
     void Update()
     {
-        
+        isGrounded = GroundCheck(groundCheckOrigine, groundDirection, groundDistance, groundLayer);
+
         if (isResponing)
         {
             if (transform.position.y <= respawnPosition.y + transform.localScale.y * 1 && !hasBeenSlowDown)
             {
-                Rigidbody playerRigidbody = gameObject.GetComponent<Rigidbody>();
-                playerRigidbody.velocity = playerRigidbody.velocity * 0.05f;
+                //Rigidbody playerRigidbody = gameObject.GetComponent<Rigidbody>();
+                rigid.velocity = rigid.velocity * 0.05f;
                 hasBeenSlowDown = true;
             } else if(transform.position == respawnPosition)
             {
@@ -62,6 +68,17 @@ public class Player2Controleur : MonoBehaviour
             }
         }
 
+        var emission = traineeParticule.emission;
+        emission.rateOverTime = Mathf.Clamp( rigid.velocity.magnitude * multiplieurRate,miniRate,maxVelocity*multiplieurRate);
+        //traineeParticule.emission.rateOverTime=rigid.velocity * multiplieurRate;
+        if(isGrounded==false && traineeParticule.isPlaying)
+        {
+            traineeParticule.Stop();
+        }
+        if (isGrounded && traineeParticule.isPlaying == false)
+        {
+            traineeParticule.Play();
+        }
         
     }
 
