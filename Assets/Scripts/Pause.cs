@@ -1,15 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Pause : MonoBehaviour
 {
     public bool timepause = false;
+    public string homePage;
 
     // Update is called once per frame
     void Update()
     {
-        GamePause(); 
+        GamePause();
     }
 
     /// <summary>
@@ -32,15 +31,16 @@ public class Pause : MonoBehaviour
     {
         if (timepause)
         {
-           if(GUI.Button(new Rect(Screen.width / 2 - 40, Screen.height / 2 - 45, 160, 50), "Continuer")){
+            if (GUI.Button(new Rect(Screen.width / 2 - 40, Screen.height / 2 - 45, 160, 50), "Continuer"))
+            {
                 timepause = !timepause;
                 TimeStop.TimeStatus(timepause);
             }
 
-           if(GUI.Button(new Rect(Screen.width / 2 - 40, Screen.height / 2+5, 160, 50),"Retourner au menu"))
+            if (GUI.Button(new Rect(Screen.width / 2 - 40, Screen.height / 2 + 5, 160, 50), "Retourner au menu"))
             {
                 Application.Quit();
-                Application.LoadLevel("Main menu");
+                Application.LoadLevel(homePage);
             }
         }
     }
