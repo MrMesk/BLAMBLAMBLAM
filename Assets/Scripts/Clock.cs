@@ -25,7 +25,10 @@ public class Clock :MonoBehaviour
     /// </summary>
     private void OnGUI()
     {
-        GUI.Box(new Rect(0, 0, 30, 30), ((int)timer).ToString());
+        if (timer >= 0)
+        {
+            GUI.Box(new Rect(0, 0, 30, 30), ((int)timer).ToString());
+        }
     }
 
 }
