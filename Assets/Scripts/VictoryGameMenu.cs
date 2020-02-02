@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class VictoryGameMenu : MonoBehaviour
 {
     public int nbPickupFinal;   
-    public Collider constructZone;
+    //public Collider constructZone;
     public GameObject player;
     
     private PlayerInventory inventory;
@@ -15,10 +15,12 @@ public class VictoryGameMenu : MonoBehaviour
     public string nextlevel;
     public string homePage;
     private bool trigger;
+    private bool victory;
 
     // Start is called before the first frame update
     void Start()
     {
+        victory = false;
         nbPickupOjective = 0;
     }
 
@@ -37,7 +39,9 @@ public class VictoryGameMenu : MonoBehaviour
         timer = player.GetComponent<Clock>().timer;
         if (trigger)
         {
+           
             nbPickupOjective += inventory.GetPickupCount();
+            Debug.Log(nbPickupOjective);
             inventory.GainPickup(-inventory.GetPickupCount());
         }
     }
@@ -49,12 +53,17 @@ public class VictoryGameMenu : MonoBehaviour
     /// <param name="other">The objects who enter on the trigger</param>
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("triger");
         inventory = FindObjectOfType<PlayerInventory>();
         if (inventory != null)
         {
+            Debug.Log("triger");
             trigger = true;
         }
+    }
+
+    public bool GetVictory()
+    {
+        return victory;
     }
 
     /// <summary>
@@ -64,7 +73,7 @@ public class VictoryGameMenu : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         Debug.Log("trigerexit");
-        if (FindObjectOfType<PlayerInventory>() != null)
+        if (other.GetComponent<PlayerInventory>() != null)
         {
             trigger = false;
             inventory = null;
@@ -89,8 +98,9 @@ public class VictoryGameMenu : MonoBehaviour
     /// </summary>
     private void OnGUI()
     {
-        if (nbPickupFinal == nbPickupOjective && timer>0)
+        if (nbPickupFinal == nbPickupOjective && timer>0 || victory)
         {
+            victory = true;
             GUI.Box(new Rect(Screen.width / 2 - 60, Screen.height / 2 - 120, 180, 250), "Victoire");
             if (GUI.Button(new Rect(Screen.width / 2 - 50, Screen.height / 2 - 50, 160, 50), "Niveau suivant"))
             {

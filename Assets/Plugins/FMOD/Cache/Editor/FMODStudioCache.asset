@@ -17,7 +17,7 @@ MonoBehaviour:
   lastModified: 637162389891677497
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &-6959650696883080679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33,7 +33,7 @@ MonoBehaviour:
   Path: event:/Slam
   guid: 5cff30dc75d09841ab153b5ea1d4dddc
   Banks:
-  - {fileID: -7165777292663039795}
+  - {fileID: -2059116080097668332}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -56,7 +56,7 @@ MonoBehaviour:
   Path: event:/Pickup
   guid: fd4591932453d041a5c644500c8ef62c
   Banks:
-  - {fileID: -7165777292663039795}
+  - {fileID: -2059116080097668332}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -97,7 +97,7 @@ MonoBehaviour:
   Path: event:/Destroy
   guid: dded771aa7ff0544b42c210f3a45dc3d
   Banks:
-  - {fileID: -7165777292663039795}
+  - {fileID: -2059116080097668332}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -119,11 +119,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/StreamingAssets/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637162389891677497
+  lastModified: 637162379623992279
   LoadResult: 0
   FileSizes:
   - Name: 
     Value: 980
+  Exists: 1
+--- !u!114 &-2059116080097668332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/StreamingAssets/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637162379623982306
+  LoadResult: 0
+  FileSizes: []
   Exists: 1
 --- !u!114 &-1924027048315675017
 MonoBehaviour:
@@ -140,7 +158,7 @@ MonoBehaviour:
   Path: event:/MainTheme
   guid: 12dbe564129d824b823967dfa3328584
   Banks:
-  - {fileID: -7165777292663039795}
+  - {fileID: -2059116080097668332}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -163,7 +181,7 @@ MonoBehaviour:
   Path: event:/Step
   guid: c62261d033777b4796b83c5f35471d96
   Banks:
-  - {fileID: -7165777292663039795}
+  - {fileID: -2059116080097668332}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -185,7 +203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: -3369559672579152733}
-  - {fileID: -7165777292663039795}
+  - {fileID: -2059116080097668332}
   EditorEvents:
   - {fileID: -1924027048315675017}
   - {fileID: -6959650696883080679}
@@ -196,10 +214,10 @@ MonoBehaviour:
   - {fileID: -5220295232428503721}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -7165777292663039795}
+  - {fileID: -2059116080097668332}
   StringsBanks:
   - {fileID: -3369559672579152733}
-  stringsBankWriteTime: 637162389891677497
+  stringsBankWriteTime: 637162379623992279
   cacheVersion: 3
 --- !u!114 &862020672976809639
 MonoBehaviour:
@@ -252,7 +270,7 @@ MonoBehaviour:
   Path: event:/Crumble
   guid: 616a2385c5785c4caa681c13b0c5fab0
   Banks:
-  - {fileID: -7165777292663039795}
+  - {fileID: -2059116080097668332}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -275,7 +293,7 @@ MonoBehaviour:
   Path: event:/Building
   guid: 956446bb59b8254aa04cf5f001f15c04
   Banks:
-  - {fileID: -7165777292663039795}
+  - {fileID: -2059116080097668332}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1

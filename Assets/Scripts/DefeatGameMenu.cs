@@ -1,59 +1,51 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DefeatGameMenu : MonoBehaviour
 {
     public GameObject menu;
     public GameObject player;
+    private VictoryGameMenu victoryScript;
     public string level;
 
     private bool isEnd;
     private float timer;   
     public string homePage;
+    private bool victory;
 
     // Start is called before the first frame update
-
+    private void Start()
+    {
+        victoryScript = FindObjectOfType<VictoryGameMenu>();
+    }
     private void Update()
     {
 
-        ActiveMenu();
-    }
-
-    /// <summary>
-    /// Say if the timer is finish or not
-    /// </summary>
-    public void ActiveMenu()
-    {
         timer = player.GetComponent<Clock>().timer;
-        menu.SetActive(isEnd);
-        if (timer <= 0)
-        {
-            isEnd = true;
-
-        }
-        else
-        {
-            isEnd = false;
-        }
-
+        victory = victoryScript.GetVictory();
     }
+
 
     /// <summary>
     /// Manage the UI.
     /// </summary>
     private void OnGUI()
     {
-        if (timer <= 0)
+        if (!victory)
         {
-            GUI.Box(new Rect(Screen.width / 2 - 60, Screen.height / 2 - 120, 180, 250), "Défaite");
-            if (GUI.Button(new Rect(Screen.width / 2 - 50, Screen.height / 2 - 50, 160, 50), "Réessayer"))
+            if (timer <= 0)
             {
-                Application.LoadLevel(level);
-            }
-            if (GUI.Button(new Rect(Screen.width / 2 - 50, Screen.height / 2 + 10, 160, 50), "Retour au menu principal"))
-            {
-                Application.LoadLevel(homePage);
+                GUI.Box(new Rect(Screen.width / 2 - 60, Screen.height / 2 - 120, 180, 250), "Défaite");
+                if (GUI.Button(new Rect(Screen.width / 2 - 50, Screen.height / 2 - 50, 160, 50), "Réessayer"))
+                {
+                    SceneManager.LoadScene(level);
+                }
+                if (GUI.Button(new Rect(Screen.width / 2 - 50, Screen.height / 2 + 10, 160, 50), "Retour au menu principal"))
+                {
+                    SceneManager.LoadScene(homePage);
+                }
             }
         }
     }

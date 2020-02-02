@@ -121,43 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &182691557 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8982070692918382882, guid: 7acee2c5a6ba9c848a1ccc98d55c0355,
-    type: 3}
-  m_PrefabInstance: {fileID: 5368366744192209811}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &182691560
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 182691557}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.51, y: 2.42, z: 3.49}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &182691561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 182691557}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f8d86691d8295a42a039c562ecdb57c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nbPickupFinal: 4
-  constructZone: {fileID: 0}
-  player: {fileID: 769542146}
-  nbPickupOjective: 0
-  nextlevel: 
-  homePage: 
 --- !u!1 &438500146
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,34 +365,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1072056005}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &769542153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 769542146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 527323f289db75543897710aec380dde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  menu: {fileID: 676933386}
-  player: {fileID: 769542146}
-  level: 
-  homePage: 
---- !u!114 &769542155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 769542146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff1cc6122074c234487a4da2cd688dbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &849467225
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -575,11 +510,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 17132340043157955, guid: af32085d28745f34d96af8239aaa1465,
-        type: 3}
-      propertyPath: vitesse
-      value: 10
-      objectReference: {fileID: 0}
+    - target: {fileID: 769542153, guid: af32085d28745f34d96af8239aaa1465, type: 3}
+      propertyPath: menu
+      value: 
+      objectReference: {fileID: 676933386}
     - target: {fileID: 17132340043157956, guid: af32085d28745f34d96af8239aaa1465,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -640,7 +574,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 769542155, guid: af32085d28745f34d96af8239aaa1465, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: af32085d28745f34d96af8239aaa1465, type: 3}
 --- !u!1 &1163936617
 GameObject:
@@ -1055,11 +990,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 406655972464969763, guid: 7acee2c5a6ba9c848a1ccc98d55c0355,
-        type: 3}
-      propertyPath: m_Mesh
+    - target: {fileID: 182691561, guid: 7acee2c5a6ba9c848a1ccc98d55c0355, type: 3}
+      propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 769542146}
     - target: {fileID: 6016841959320795324, guid: 7acee2c5a6ba9c848a1ccc98d55c0355,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1117,43 +1051,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8023530861817807814, guid: 7acee2c5a6ba9c848a1ccc98d55c0355,
         type: 3}
-      propertyPath: mesh.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8023530861817807814, guid: 7acee2c5a6ba9c848a1ccc98d55c0355,
-        type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 769542146}
-    - target: {fileID: 8023530861817807814, guid: 7acee2c5a6ba9c848a1ccc98d55c0355,
-        type: 3}
-      propertyPath: nbOfStates
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8023530861817807814, guid: 7acee2c5a6ba9c848a1ccc98d55c0355,
-        type: 3}
-      propertyPath: mesh.Array.data[0]
-      value: 
-      objectReference: {fileID: -4852580466505860386, guid: 91f67f167d4c2844f85350e9975d9582,
-        type: 3}
-    - target: {fileID: 8023530861817807814, guid: 7acee2c5a6ba9c848a1ccc98d55c0355,
-        type: 3}
-      propertyPath: mesh.Array.data[1]
-      value: 
-      objectReference: {fileID: -7622670718416285412, guid: ba506ea9056c611459fa1a9b8db1f1da,
-        type: 3}
-    - target: {fileID: 8023530861817807814, guid: 7acee2c5a6ba9c848a1ccc98d55c0355,
-        type: 3}
-      propertyPath: mesh.Array.data[2]
-      value: 
-      objectReference: {fileID: 5491310822781418610, guid: ec74d7392e27bb042ae51f0b4e1e43bb,
-        type: 3}
-    - target: {fileID: 8023530861817807814, guid: 7acee2c5a6ba9c848a1ccc98d55c0355,
-        type: 3}
-      propertyPath: mesh.Array.data[4]
-      value: 
-      objectReference: {fileID: 5491310822781418610, guid: ec74d7392e27bb042ae51f0b4e1e43bb,
-        type: 3}
     - target: {fileID: 8982070692918382882, guid: 7acee2c5a6ba9c848a1ccc98d55c0355,
         type: 3}
       propertyPath: m_Name

@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerInventory))]
 public class Player2Controleur : MonoBehaviour
 {
+    public Animator playerAnimator;
+
     public Vector3 respawnPosition;
     public float respawnDelay;
     public int maxLifePoint;
@@ -46,6 +48,7 @@ public class Player2Controleur : MonoBehaviour
     void Update()
     {
         isGrounded = GroundCheck(groundCheckOrigine, groundDirection, groundDistance, groundLayer);
+        playerAnimator.SetBool("IsGrounded", isGrounded);
 
         /*if (isResponing)
         {
@@ -67,6 +70,8 @@ public class Player2Controleur : MonoBehaviour
             if (Input.GetButtonDown(jumpInput) && GroundCheck(groundCheckOrigine, groundDirection, groundDistance, groundLayer))
             {
                 Debug.Log("jump");
+
+                playerAnimator.SetTrigger("Jump");
                 AddForce(jumpForce * jumpDirection, rigid, jumpType, true);
             }
         }
@@ -82,10 +87,11 @@ public class Player2Controleur : MonoBehaviour
         {
             traineeParticule.Play();
         }
-        Vector3 direc = GetPlayerDirection()*vitesse*Time.deltaTime;
+        Vector3 direc = GetPlayerDirection()*vitesse;
         if (isResponing == false)
         {
-            transform.Translate(direc, Space.World);
+            playerAnimator.SetFloat("moveSpeed", direc.magnitude);
+            transform.Translate(direc * Time.deltaTime, Space.World);
            /* rigid.AddForce(direc, ForceMode.Acceleration);
             rigid.velocity.Set(Mathf.Clamp(rigid.velocity.x, 0, maxVelocity), rigid.velocity.y, Mathf.Clamp(rigid.velocity.z, 0, maxVelocity));*/
             //Debug.Log(rigid.velocity);
