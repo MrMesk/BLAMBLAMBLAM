@@ -20,6 +20,11 @@ public class Clock :MonoBehaviour
         timer -= Time.deltaTime;
     }
 
+    public void TimerIncrementation()
+    {
+        timer += Time.deltaTime;
+    }
+
     /// <summary>
     /// Manage the UI.
     /// </summary>

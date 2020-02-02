@@ -5,27 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class VictoryGameMenu : MonoBehaviour
 {
+    public GameObject menu;
     public int nbPickupFinal;   
     public Collider constructZone;
     public GameObject player;
     
     private PlayerInventory inventory;
     public int nbPickupOjective;
-    private float timer;
     public string nextlevel;
     public string homePage;
     private bool trigger;
+    private bool defeat = false;
+    private bool victory = false;
+    private bool isEnd;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        nbPickupOjective = 0;
-    }
 
     // Update is called once per frame
     private void Update()
     {
-        
+        inventory = player.GetComponent<PlayerInventory>();
         GiveToObjective();
     }
     
@@ -34,10 +32,11 @@ public class VictoryGameMenu : MonoBehaviour
     /// </summary>
     private void GiveToObjective()
     {
-        timer = player.GetComponent<Clock>().timer;
+        
         if (trigger)
         {
             nbPickupOjective += inventory.GetPickupCount();
+           
             inventory.GainPickup(-inventory.GetPickupCount());
         }
     }
@@ -82,21 +81,31 @@ public class VictoryGameMenu : MonoBehaviour
     {
         return nbPickupFinal;
     }
+
+    public bool GetVictory()
+    {
+        return victory;
+    }
     /// <summary>
     /// Manage the UI
     /// </summary>
     private void OnGUI()
     {
-        if (nbPickupFinal == nbPickupOjective && timer>0)
+
+        if (!defeat)
         {
-            GUI.Box(new Rect(Screen.width / 2 - 60, Screen.height / 2 - 120, 180, 250), "Victoire");
-            if (GUI.Button(new Rect(Screen.width / 2 - 50, Screen.height / 2 - 50, 160, 50), "Niveau suivant"))
+            if (nbPickupFinal <= nbPickupOjective)
             {
-                Application.LoadLevel(nextlevel);
-            }
-            if (GUI.Button(new Rect(Screen.width / 2 - 50, Screen.height / 2 + 10, 160, 50), "Retour au menu principal"))
-            {
-                Application.LoadLevel(homePage);
+                victory = true;
+                GUI.Box(new Rect(Screen.width / 2 - 60, Screen.height / 2 - 120, 180, 250), "Victoire");
+                if (GUI.Button(new Rect(Screen.width / 2 - 50, Screen.height / 2 - 50, 160, 50), "Niveau suivant"))
+                {
+                    Application.LoadLevel(nextlevel);
+                }
+                if (GUI.Button(new Rect(Screen.width / 2 - 50, Screen.height / 2 + 10, 160, 50), "Retour au menu principal"))
+                {
+                    Application.LoadLevel(homePage);
+                }
             }
         }
     }

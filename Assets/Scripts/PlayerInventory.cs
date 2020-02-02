@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    private int pickupCount = 0;
+    public int pickupCount;
     public int GetPickupCount()
     {
         return pickupCount;
