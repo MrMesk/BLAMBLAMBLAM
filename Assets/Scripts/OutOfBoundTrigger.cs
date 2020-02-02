@@ -12,7 +12,9 @@ public class OutOfBoundTrigger : MonoBehaviour
         Player2Controleur player = other.GetComponent<Player2Controleur>();
         if (player != null)
         {
-            player.respawn();
+
+            Debug.Log("Player ded");
+            player.Respawn();
         } else
         {
             Destroy(other);

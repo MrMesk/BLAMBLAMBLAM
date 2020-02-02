@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 17132340043157959}
   - component: {fileID: 17132340043157954}
   - component: {fileID: 17132340043157955}
+  - component: {fileID: 2341424992513039628}
   m_Layer: 9
   m_Name: player
   m_TagString: Untagged
@@ -108,6 +109,19 @@ MonoBehaviour:
   traineeParticule: {fileID: 6586074456892467678}
   multiplieurRate: 3
   miniRate: 10
+--- !u!114 &2341424992513039628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17132340043157960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 555c2f7fba789e543a2428d380429b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 742221
 --- !u!1 &17132340134760030
 GameObject:
   m_ObjectHideFlags: 0
