@@ -58,6 +58,7 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
+fmod_editor.log
 # Crashlytics generated file
 crashlytics-build.properties
 
