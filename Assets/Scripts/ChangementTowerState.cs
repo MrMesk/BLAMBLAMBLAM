@@ -9,14 +9,16 @@ public class ChangementTowerState : MonoBehaviour
 
     private int nbPickupObjective;
     private int nbPickupFinal;
-    List<int> state;
+
     public List<Mesh> mesh;
+    public List<int> state;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-        nbPickupFinal = player.GetComponent<VictoryGameMenu>().GetNbPickupFinal();
+        nbPickupFinal = FindObjectOfType<VictoryGameMenu>().GetNbPickupFinal();
         state = new List<int>();
         GenerateListAndMesh();
 
@@ -36,7 +38,7 @@ public class ChangementTowerState : MonoBehaviour
     {
         for (int i = 0; i < nbOfStates; i++)
         {
-            state.Add((nbPickupFinal / nbOfStates) * (i + 1));
+            state.Add((nbPickupFinal / nbOfStates) * (i + 1));  //pickf=4 
         }
     }
 
@@ -47,21 +49,18 @@ public class ChangementTowerState : MonoBehaviour
     /// </summary>
     void TowerState()
     {
-        nbPickupObjective = player.GetComponent<VictoryGameMenu>().GetNbPickupOjective();
+        nbPickupObjective = FindObjectOfType<VictoryGameMenu>().GetNbPickupOjective();
 
         for (int i = 0; i < state.Count-1; i++)
         {
-            if (nbPickupObjective >= state[i] && nbPickupObjective < state[i + 1])
+            if (nbPickupObjective >= state[i] && nbPickupObjective < state[i+1])
             {
-                tower.GetComponent<MeshFilter>().mesh = mesh[i];         
+                tower.GetComponent<MeshFilter>().mesh = mesh[i];
             }
-
-            if (nbPickupObjective >= state[state.Count - 1])
-            {
-                tower.GetComponent<MeshFilter>().mesh = mesh[state.Count - 1];
-            }
-
-
+        }
+        if (nbPickupObjective >= state[state.Count - 1])
+        {
+            tower.GetComponent<MeshFilter>().mesh = mesh[mesh.Count - 1];
         }
     }
 }

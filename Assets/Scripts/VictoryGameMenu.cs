@@ -48,7 +48,8 @@ public class VictoryGameMenu : MonoBehaviour
     /// <param name="other">The objects who enter on the trigger</param>
     private void OnTriggerEnter(Collider other)
     {
-        inventory = other.GetComponent<PlayerInventory>();
+        Debug.Log("triger");
+        inventory = FindObjectOfType<PlayerInventory>();
         if (inventory != null)
         {
             trigger = true;
@@ -61,7 +62,8 @@ public class VictoryGameMenu : MonoBehaviour
     /// <param name="other">The objects who enter on the trigger</param>
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<PlayerInventory>() != null)
+        Debug.Log("trigerexit");
+        if (FindObjectOfType<PlayerInventory>() != null)
         {
             trigger = false;
             inventory = null;
@@ -94,18 +96,14 @@ public class VictoryGameMenu : MonoBehaviour
 
         if (!defeat)
         {
-            if (nbPickupFinal <= nbPickupOjective)
+            GUI.Box(new Rect(Screen.width / 2 - 60, Screen.height / 2 - 120, 180, 250), "Victoire");
+            if (GUI.Button(new Rect(Screen.width / 2 - 50, Screen.height / 2 - 50, 160, 50), "Niveau suivant"))
             {
-                victory = true;
-                GUI.Box(new Rect(Screen.width / 2 - 60, Screen.height / 2 - 120, 180, 250), "Victoire");
-                if (GUI.Button(new Rect(Screen.width / 2 - 50, Screen.height / 2 - 50, 160, 50), "Niveau suivant"))
-                {
-                    Application.LoadLevel(nextlevel);
-                }
-                if (GUI.Button(new Rect(Screen.width / 2 - 50, Screen.height / 2 + 10, 160, 50), "Retour au menu principal"))
-                {
-                    Application.LoadLevel(homePage);
-                }
+                SceneManager.LoadScene(nextlevel);
+            }
+            if (GUI.Button(new Rect(Screen.width / 2 - 50, Screen.height / 2 + 10, 160, 50), "Retour au menu principal"))
+            {
+                SceneManager.LoadScene(homePage);
             }
         }
     }

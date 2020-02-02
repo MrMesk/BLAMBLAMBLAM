@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 //using UnityStandardAssets.CrossPlatformInput;
 
+[RequireComponent(typeof(PlayerInventory))]
 public class Player2Controleur : MonoBehaviour
 {
     public Vector3 respawnPosition;
@@ -46,7 +47,7 @@ public class Player2Controleur : MonoBehaviour
     {
         isGrounded = GroundCheck(groundCheckOrigine, groundDirection, groundDistance, groundLayer);
 
-        if (isResponing)
+        /*if (isResponing)
         {
             if (transform.position.y <= respawnPosition.y + transform.localScale.y * 1 && !hasBeenSlowDown)
             {
@@ -56,9 +57,11 @@ public class Player2Controleur : MonoBehaviour
             } else if(transform.position == respawnPosition)
             {
                 isResponing = false;
+
+                //FIX LES BAILS AVEC UNE COROUTINE
             }
-        }
-        else
+        }*/
+        if (isResponing == false)
         {
             transform.LookAt(transform.position + GetPlayerDirection());
             if (Input.GetButtonDown(jumpInput) && GroundCheck(groundCheckOrigine, groundDirection, groundDistance, groundLayer))
@@ -79,29 +82,47 @@ public class Player2Controleur : MonoBehaviour
         {
             traineeParticule.Play();
         }
-        
-    }
-
-    private void FixedUpdate()
-    {
         Vector3 direc = GetPlayerDirection()*vitesse*Time.deltaTime;
         if (isResponing == false)
         {
-            rigid.AddForce(direc, ForceMode.Acceleration);
-            rigid.velocity.Set(Mathf.Clamp(rigid.velocity.x, 0, maxVelocity), rigid.velocity.y, Mathf.Clamp(rigid.velocity.z, 0, maxVelocity));
+            transform.Translate(direc, Space.World);
+           /* rigid.AddForce(direc, ForceMode.Acceleration);
+            rigid.velocity.Set(Mathf.Clamp(rigid.velocity.x, 0, maxVelocity), rigid.velocity.y, Mathf.Clamp(rigid.velocity.z, 0, maxVelocity));*/
             //Debug.Log(rigid.velocity);
         }
+        
+    }
+    
+    public IEnumerator GestionChute()
+    {
+        while (transform.position.y > respawnPosition.y + transform.localScale.y * 1 && !hasBeenSlowDown)
+        {
+            yield return null;
+        }
+        rigid.velocity = rigid.velocity * 0.05f;
+        hasBeenSlowDown = true;
+        isResponing = false;
     }
 
-    public void respawn()
+    public void Respawn()
     {
         hasBeenSlowDown = false;
         isResponing = true;
         PlayerInventory inventory = gameObject.GetComponent<PlayerInventory>();
-        inventory.GainPickup(-inventory.GetPickupCount());
+
+        if(inventory)
+        {
+            inventory.GainPickup(-inventory.GetPickupCount());
+        }
+        else
+        {
+            Debug.Log("No player inventory");
+        }
+
         currentLifePoint = maxLifePoint;
         float estimatedHeight = (float)(0.5 * 9.81 * Mathf.Pow(respawnDelay, 2));
         transform.position = new Vector3(respawnPosition.x, respawnPosition.y + estimatedHeight, respawnPosition.z);
+        StartCoroutine(GestionChute());
     }
 
     public void takeDamage(int damage)
@@ -109,7 +130,7 @@ public class Player2Controleur : MonoBehaviour
         currentLifePoint -= damage;
         if (currentLifePoint <= 0)
         {
-            respawn();
+            Respawn();
         } else if (currentLifePoint > maxLifePoint)
         {
             currentLifePoint = maxLifePoint;
