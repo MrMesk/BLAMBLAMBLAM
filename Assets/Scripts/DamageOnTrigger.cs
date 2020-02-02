@@ -32,6 +32,11 @@ public class DamageOnTrigger : MonoBehaviour
 			{
 				Destroy(gameObject);
 			}
+
+            GameObject particle = Instantiate(spawnedFX, transform.position, Quaternion.identity);
+            Destroy(particle, 2f);
 		}
+
+
 	}
 }
