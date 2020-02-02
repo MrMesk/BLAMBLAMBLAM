@@ -41,9 +41,7 @@ public class ChangementTowerState : MonoBehaviour
     {
         for (int i = 0; i <= nbOfStates; i++)
         {
-            Debug.Log((nbPickupFinal / nbOfStates) * (i + 1));
             state.Add((nbPickupFinal / nbOfStates) * (i + 1));
-
         }
         mesh.Add(mesh1);
         mesh.Add(mesh2);
@@ -59,27 +57,13 @@ public class ChangementTowerState : MonoBehaviour
     void TowerState()
     {
         nbPickupObjective = player.GetComponent<VictoryGameMenu>().GetNbPickupOjective();
-        Debug.Log(nbPickupObjective);
 
-        if (nbPickupObjective >= state[0] && nbPickupObjective < state[1])
+        for (int i = 0; i < state.Count; i++)
         {
-            tower.GetComponent<MeshFilter>().mesh = mesh[0];
+            if (nbPickupObjective >= state[i] && nbPickupObjective < state[i + 1])
+            {
+                tower.GetComponent<MeshFilter>().mesh = mesh[i];
+            }
         }
-
-        if (nbPickupObjective >= state[1] && nbPickupObjective < state[2])
-        {
-            tower.GetComponent<MeshFilter>().mesh = mesh[1];
-        }
-
-        if (nbPickupObjective >= state[2] && nbPickupObjective < state[3])
-        {
-            tower.GetComponent<MeshFilter>().mesh = mesh[2];
-        }
-
-        if (nbPickupObjective >= state[3] && nbPickupObjective < state[4])
-        {
-            tower.GetComponent<MeshFilter>().mesh = mesh[3];
-        }
-
     }
 }
