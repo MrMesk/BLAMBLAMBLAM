@@ -79,18 +79,19 @@ public class Player2Controleur : MonoBehaviour
         {
             traineeParticule.Play();
         }
+        Vector3 direc = GetPlayerDirection()*vitesse*Time.deltaTime;
+        if (isResponing == false)
+        {
+            transform.Translate(direc, Space.World);
+           /* rigid.AddForce(direc, ForceMode.Acceleration);
+            rigid.velocity.Set(Mathf.Clamp(rigid.velocity.x, 0, maxVelocity), rigid.velocity.y, Mathf.Clamp(rigid.velocity.z, 0, maxVelocity));*/
+            //Debug.Log(rigid.velocity);
+        }
         
     }
 
     private void FixedUpdate()
     {
-        Vector3 direc = GetPlayerDirection()*vitesse*Time.deltaTime;
-        if (isResponing == false)
-        {
-            rigid.AddForce(direc, ForceMode.Acceleration);
-            rigid.velocity.Set(Mathf.Clamp(rigid.velocity.x, 0, maxVelocity), rigid.velocity.y, Mathf.Clamp(rigid.velocity.z, 0, maxVelocity));
-            //Debug.Log(rigid.velocity);
-        }
     }
 
     public void respawn()
