@@ -8,8 +8,9 @@ public class Player2Controleur : MonoBehaviour
 {
     public Animator playerAnimator;
 
-    public Vector3 respawnPosition;
+    public Transform respawnPosition;
     public float respawnDelay;
+	public GameObject respawnFX;
     public int maxLifePoint;
 
     public float vitesse;
@@ -50,20 +51,6 @@ public class Player2Controleur : MonoBehaviour
         isGrounded = GroundCheck(groundCheckOrigine, groundDirection, groundDistance, groundLayer);
         playerAnimator.SetBool("IsGrounded", isGrounded);
 
-        /*if (isResponing)
-        {
-            if (transform.position.y <= respawnPosition.y + transform.localScale.y * 1 && !hasBeenSlowDown)
-            {
-                //Rigidbody playerRigidbody = gameObject.GetComponent<Rigidbody>();
-                rigid.velocity = rigid.velocity * 0.05f;
-                hasBeenSlowDown = true;
-            } else if(transform.position == respawnPosition)
-            {
-                isResponing = false;
-
-                //FIX LES BAILS AVEC UNE COROUTINE
-            }
-        }*/
         if (isResponing == false)
         {
             transform.LookAt(transform.position + GetPlayerDirection());
@@ -101,7 +88,7 @@ public class Player2Controleur : MonoBehaviour
     
     public IEnumerator GestionChute()
     {
-        while (transform.position.y > respawnPosition.y + transform.localScale.y * 1 && !hasBeenSlowDown)
+        while (transform.position.y > respawnPosition.position.y + transform.localScale.y * 1 && !hasBeenSlowDown)
         {
             yield return null;
         }
@@ -116,20 +103,32 @@ public class Player2Controleur : MonoBehaviour
         isResponing = true;
         PlayerInventory inventory = gameObject.GetComponent<PlayerInventory>();
 
-        if(inventory)
+       /* if(inventory)
         {
             inventory.GainPickup(-inventory.GetPickupCount());
         }
         else
         {
             Debug.Log("No player inventory");
-        }
+        }*/
 
         currentLifePoint = maxLifePoint;
-        float estimatedHeight = (float)(0.5 * 9.81 * Mathf.Pow(respawnDelay, 2));
-        transform.position = new Vector3(respawnPosition.x, respawnPosition.y + estimatedHeight, respawnPosition.z);
-        StartCoroutine(GestionChute());
+		//float estimatedHeight = (float)(0.5 * 9.81 * Mathf.Pow(respawnDelay, 2));
+		// StartCoroutine(GestionChute());
+
+		StartCoroutine(RespawnAfter());
     }
+
+	public IEnumerator RespawnAfter()
+	{
+		yield return new WaitForSeconds(respawnDelay);
+		rigid.velocity = Vector3.zero;
+
+		transform.position = respawnPosition.position;
+
+		GameObject gfx = Instantiate(respawnFX, transform.position, transform.rotation);
+		Destroy(gfx, 3f);
+	}
 
     public void takeDamage(int damage)
     {
@@ -160,6 +159,10 @@ public class Player2Controleur : MonoBehaviour
         {
             rigid.velocity.Set(rigid.velocity.x, 0, rigid.velocity.z);
         }
-        rigid.AddForce(direction, modeForce);
+
+		if(GroundCheck(transform, direction * -1f, 1f, groundLayer))
+		{
+			rigid.AddForce(direction, modeForce);
+		}
     }
 }

@@ -14,7 +14,7 @@ namespace FMODUnity
     public class EventManager : MonoBehaviour
     {
         const string CacheAssetName = "FMODStudioCache";
-        const string CacheAssetFullName = "Assets/Plugins/FMOD/Cache/Editor/" + CacheAssetName + ".asset";
+        const string CacheAssetFullName = "Assets/Plugins/FMOD/Resources/" + CacheAssetName + ".asset";
         static EventCache eventCache;
 
         const string StringBankExtension = "strings.bank";
@@ -26,8 +26,6 @@ namespace FMODUnity
         const int CountdownTimerReset = 15 / FilePollTimeSeconds;
 
         static int countdownTimer;
-
-        public static bool removeBanks = false;
 
 #if UNITY_EDITOR
         [MenuItem("FMOD/Refresh Banks", priority = 1)]
@@ -64,8 +62,10 @@ namespace FMODUnity
                     UnityEngine.Debug.Log("FMOD Studio: Cannot find serialized event cache or cache in old format, creating new instance");
                     eventCache = ScriptableObject.CreateInstance<EventCache>();
                     eventCache.cacheVersion = EventCache.CurrentCacheVersion;
-
-                    Directory.CreateDirectory(Path.GetDirectoryName(CacheAssetFullName));
+                    if (!Directory.Exists("Assets/Plugins/FMOD/Resources"))
+                    {
+                        AssetDatabase.CreateFolder("Assets/Plugins/FMOD", "Resources");
+                    }
                     AssetDatabase.CreateAsset(eventCache, CacheAssetFullName);
                 }
             }
@@ -522,25 +522,6 @@ namespace FMODUnity
                 return;
             }
 
-            string otherBankTargetFolder, otherBankTargetExension;
-            string[] otherBankFiles = new string[] { };
-
-            if (removeBanks)
-            {
-                otherBankTargetFolder =
-                Settings.Instance.ImportType == ImportType.AssetBundle
-                ? Application.dataPath + "/StreamingAssets"
-                : Application.dataPath + "/" + Settings.Instance.TargetAssetPath;
-                Directory.CreateDirectory(bankTargetFolder);
-
-                otherBankTargetExension =
-                    Settings.Instance.ImportType == ImportType.AssetBundle
-                    ? "bank"
-                    : "bytes";
-
-                otherBankFiles = Directory.GetFiles(otherBankTargetFolder, "*." + otherBankTargetExension);
-            }
-
             bool madeChanges = false;
 
             try
@@ -549,54 +530,26 @@ namespace FMODUnity
                 string[] currentBankFiles = Directory.GetFiles(bankTargetFolder, "*." + bankTargetExension);
                 foreach (var bankFileName in currentBankFiles)
                 {
-                    string bankName = Path.GetFileNameWithoutExtension(bankFileName);
-                    if (!eventCache.EditorBanks.Exists((x) => bankName == x.Name))
+                    string assetString = bankFileName.Replace(Application.dataPath, "Assets");
+                    AssetDatabase.ImportAsset(assetString);
+                    UnityEngine.Object obj = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetString);
+                    string[] labels = AssetDatabase.GetLabels(obj);
+                    bool containsLabel = false;
+                    foreach (string label in labels)
                     {
-                        string assetString = bankFileName.Replace(Application.dataPath, "Assets");
-                        AssetDatabase.ImportAsset(assetString);
-                        UnityEngine.Object obj = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetString);
-                        string[] labels = AssetDatabase.GetLabels(obj);
-                        bool containsLabel = false;
-                        foreach (string label in labels)
+                        if (label.Equals("FMOD"))
                         {
-                            if (label.Equals("FMOD"))
-                            {
-                                containsLabel = true;
-                                break;
-                            }
-                        }
-                        if (containsLabel)
-                        {
-                            File.Delete(bankFileName);
-                            madeChanges = true;
+                            containsLabel = true;
+                            break;
                         }
                     }
-                }
 
-                if (removeBanks)
-                {
-                    foreach (var otherBankFileName in otherBankFiles)
+                    string bankName = Path.GetFileNameWithoutExtension(bankFileName);
+                    if (containsLabel && (!eventCache.EditorBanks.Exists((x) => bankName == x.Name)))
                     {
-                        string assetString = otherBankFileName.Replace(Application.dataPath, "Assets");
-                        AssetDatabase.ImportAsset(assetString);
-                        UnityEngine.Object obj = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetString);
-                        string[] labels = AssetDatabase.GetLabels(obj);
-                        foreach (string label in labels)
-                        {
-                            if (label.Equals("FMOD"))
-                            {
-                                File.Delete(otherBankFileName);
-                                madeChanges = true;
-                                break;
-                            }
-                        }
+                        File.Delete(bankFileName);
+                        madeChanges = true;
                     }
-                    AssetDatabase.Refresh();
-                    if (Directory.GetFiles(Path.GetDirectoryName(otherBankFiles[0])).Length == 0)
-                    {
-                        Directory.Delete(Path.GetDirectoryName(otherBankFiles[0]));
-                    }
-                    removeBanks = false;
                 }
 
                 // Copy over any files that don't match timestamp or size or don't exist
@@ -628,6 +581,7 @@ namespace FMODUnity
                         UnityEngine.Object obj = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetString);
                         AssetDatabase.SetLabels(obj, new string[] { "FMOD" });
                     }
+                    AssetDatabase.SaveAssets();
                 }
             }
             catch(Exception exception)
@@ -639,7 +593,6 @@ namespace FMODUnity
 
             if (madeChanges)
             {
-                AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
                 UnityEngine.Debug.Log(string.Format("FMOD Studio: copy banks for platform {0} : copying banks from {1} to {2} succeeded", platform.ToString(), bankSourceFolder, bankTargetFolder));
             }

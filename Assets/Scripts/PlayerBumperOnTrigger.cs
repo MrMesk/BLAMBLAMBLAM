@@ -18,7 +18,7 @@ public class PlayerBumperOnTrigger : MonoBehaviour
 			if(p != null)
 			{
 				Rigidbody r = p.GetComponent<Rigidbody>();
-				p.AddForce(transform.up * bumpForce, r, ForceMode.Impulse, true);
+				p.AddForce(p.transform.up * bumpForce, r, ForceMode.Impulse, true);
 			}
 		}
 	}

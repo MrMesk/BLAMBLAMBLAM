@@ -507,16 +507,6 @@ namespace FMODUnity
             {
                 hasBankTargetChanged = true;
                 settings.ImportType = importType;
-
-                bool deleteBanks = EditorUtility.DisplayDialog(
-                    "FMOD Bank Import Type Changed", "Do you want to delete the " + (importType == ImportType.AssetBundle ? "StreamingAssets" : "AssetBundle") + " banks in " + (importType == ImportType.AssetBundle ? Application.streamingAssetsPath : Application.dataPath + '/' + settings.TargetAssetPath)
-                    , "Yes", "No");
-                if (deleteBanks)
-                {
-                    // Delete the old banks
-                    EventManager.removeBanks = true;
-                    EventManager.RefreshBanks();
-                }
             }
 
             // ----- Text Assets -------------

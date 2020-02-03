@@ -13,14 +13,19 @@ public class ChangementTowerState : MonoBehaviour
     public List<Mesh> mesh;
     public List<int> state;
 
-
+	MeshFilter towerMesh;
+	VictoryGameMenu menu;
 
     // Start is called before the first frame update
     void Start()
     {
         nbPickupFinal = FindObjectOfType<VictoryGameMenu>().GetNbPickupFinal();
         state = new List<int>();
-        GenerateListAndMesh();
+
+		towerMesh = tower.GetComponent<MeshFilter>();
+		menu = GetComponent<VictoryGameMenu>();
+
+		GenerateListAndMesh();
 
     }
 
@@ -28,7 +33,7 @@ public class ChangementTowerState : MonoBehaviour
     void Update()
     {
 
-        TowerState();
+       // TowerState();
     }
 
     /// <summary>
@@ -48,7 +53,7 @@ public class ChangementTowerState : MonoBehaviour
     /// <summary>
     /// Manage the State of the Tower
     /// </summary>
-    void TowerState()
+   public  void TowerState()
     {
         nbPickupObjective = FindObjectOfType<VictoryGameMenu>().GetNbPickupOjective();
 
@@ -56,12 +61,12 @@ public class ChangementTowerState : MonoBehaviour
         {
             if (nbPickupObjective >= state[i] && nbPickupObjective < state[i+1])
             {
-                tower.GetComponent<MeshFilter>().mesh = mesh[i];
+				towerMesh.mesh = mesh[i];
             }
         }
         if (nbPickupObjective >= state[state.Count - 1])
         {
-            tower.GetComponent<MeshFilter>().mesh = mesh[mesh.Count - 1];
+			towerMesh.mesh = mesh[mesh.Count - 1];
         }
     }
 }

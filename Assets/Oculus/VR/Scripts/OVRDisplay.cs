@@ -162,6 +162,7 @@ public class OVRDisplay
 	{
 #if UNITY_2017_2_OR_NEWER
         UnityEngine.XR.InputTracking.Recenter();
+		//UnityEngine.XR.XRInputSubsystem.
 #else
 		UnityEngine.VR.InputTracking.Recenter();
 #endif
