@@ -13,12 +13,11 @@ public class OutOfBoundTrigger : MonoBehaviour
     {
         Player2Controleur player = other.GetComponent<Player2Controleur>();
 
-		FMODUnity.RuntimeManager.PlayOneShot(respawnEventName, transform.position);
-
 		if (player != null)
         {
 
             Debug.Log("Player ded");
+			FMODUnity.RuntimeManager.PlayOneShot(respawnEventName, transform.position);
             player.Respawn();
         } else
         {

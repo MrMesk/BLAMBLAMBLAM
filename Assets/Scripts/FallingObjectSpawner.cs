@@ -31,6 +31,9 @@ public class FallingObjectSpawner : MonoBehaviour
 
     private float calculateNextSpawn()
     {
-        return timeBetweenSpawn + variation* Random.Range(-1, 1);
+		float time = timeBetweenSpawn + variation * Random.Range(-1, 1);
+		time = Mathf.Clamp(time, 0f, timeBetweenSpawn + variation);
+
+		return time;
     }
 }

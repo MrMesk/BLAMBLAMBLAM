@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class VictoryGameMenu : MonoBehaviour
 {
@@ -13,12 +14,19 @@ public class VictoryGameMenu : MonoBehaviour
 
 	public GameObject endUI;
 	public Text endUItext;
+	public TextMeshProUGUI endUItextVR;
+	public TextMeshProUGUI TimerText1;
+	public TextMeshProUGUI TimerText2;
+
     
     private PlayerInventory inventory;
     public int nbPickupOjective;
 
 	public float remainingTime = 60f;
     private float timer;
+
+	public GameObject[] lights;
+	public GameObject lostLight;
 
 	ChangementTowerState twr;
 
@@ -51,6 +59,8 @@ public class VictoryGameMenu : MonoBehaviour
 			if(timer > 0f)
 			{
 				timer -= Time.deltaTime;
+				TimerText1.text = Mathf.RoundToInt(timer).ToString();
+				TimerText2.text = Mathf.RoundToInt(timer).ToString();
 			}
 			else
 			{
@@ -107,16 +117,49 @@ public class VictoryGameMenu : MonoBehaviour
         return nbPickupFinal;
     }
 
+	public IEnumerator Vibrate ()
+	{
+		OVRInput.SetControllerVibration(0.5f, 0.5f, OVRInput.Controller.LTouch);
+		OVRInput.SetControllerVibration(0.5f, 0.5f, OVRInput.Controller.RTouch);
+		yield return new WaitForSeconds(2f);
+		OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.LTouch);
+		OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
+	}
+
 	void SpawnVictoryUI()
 	{
+		StartCoroutine(Vibrate());
 		endUI.SetActive(true);
 		endUItext.text = "Victory !";
+		endUItextVR.text = "Victory !";
 	}
 
 	void SpawnDefeatUI ()
 	{
+		foreach (GameObject g in lights)
+		{
+			g.SetActive(false);
+		}
+		if(lostLight)
+		{
+			lostLight.SetActive(true);
+		}
+
+		FindObjectOfType<Shaker>().Shake(3f,2f);
+		FindObjectOfType<FallingObjectSpawner>().timeBetweenSpawn = 1f;
+		FindObjectOfType<FallingObjectSpawner>().variation = 0.5f;
+
+		StartCoroutine(Vibrate());
 		endUI.SetActive(true);
+		StartCoroutine(LoadMenuAfterX());
 		endUItext.text = "You didn't repair the altar in time..";
+		if(endUItextVR)endUItextVR.text = "You didn't repair the altar in time..";
+	}
+
+	public IEnumerator LoadMenuAfterX()
+	{
+		yield return new WaitForSeconds(20f);
+		QuitToMenu();
 	}
 
 	public void ReloadScene()

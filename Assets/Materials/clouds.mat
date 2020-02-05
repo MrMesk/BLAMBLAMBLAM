@@ -22,13 +22,13 @@ Material:
     m_TexEnvs: []
     m_Floats:
     - Vector1_1A1B6BF6: 1
-    - Vector1_2054E851: 1
-    - Vector1_3815E790: 3
+    - Vector1_2054E851: 0.05
+    - Vector1_3815E790: 1
     - Vector1_5751AA70: 0
     - Vector1_84571B0F: 0.25
     - Vector1_90375CD9: 0.15
     - Vector1_9325DD9F: 1
-    - Vector1_94E8DF3: 15
+    - Vector1_94E8DF3: 20
     - Vector1_C2E29679: 1000
     - Vector1_F195D796: 15
     - Vector1_F1A2C64C: 1

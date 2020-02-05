@@ -96,9 +96,17 @@ public class Player2Controleur : MonoBehaviour
         hasBeenSlowDown = true;
         isResponing = false;
     }
-
-    public void Respawn()
+	public IEnumerator Vibrate ()
+	{
+		OVRInput.SetControllerVibration(0.5f, 0.5f, OVRInput.Controller.LTouch);
+		OVRInput.SetControllerVibration(0.5f, 0.5f, OVRInput.Controller.RTouch);
+		yield return new WaitForSeconds(1f);
+		OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.LTouch);
+		OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
+	}
+	public void Respawn()
     {
+		StartCoroutine(Vibrate());
         hasBeenSlowDown = false;
         isResponing = true;
         PlayerInventory inventory = gameObject.GetComponent<PlayerInventory>();
@@ -127,6 +135,8 @@ public class Player2Controleur : MonoBehaviour
 		transform.position = respawnPosition.position;
 
 		GameObject gfx = Instantiate(respawnFX, transform.position, transform.rotation);
+		isResponing = false;
+		hasBeenSlowDown = true;
 		Destroy(gfx, 3f);
 	}
 

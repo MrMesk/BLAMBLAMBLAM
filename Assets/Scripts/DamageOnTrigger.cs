@@ -6,6 +6,8 @@ public class DamageOnTrigger : MonoBehaviour
 {
 	public float cooldown = .3f;
 
+	public AudioClip slamSFX;
+	public OVRInput.Controller vibrateController;
 	float timer;
 	public float baseAppliedForce = 500;
 	public float maxForce = 25000f;
@@ -13,6 +15,13 @@ public class DamageOnTrigger : MonoBehaviour
 	public GameObject spawnedFX;
 	public float distanceOffset = 0.5f;
 	public LayerMask platformLayerMask;
+
+	public float baseShakeStrength = 1f;
+	public float shakeDuration = .2f;
+
+	public float minAvgSpeed = 10f;
+
+	Shaker shaker;
 
 	public bool debugLog = false;
 
@@ -30,6 +39,7 @@ public class DamageOnTrigger : MonoBehaviour
 
 	private void Start ()
 	{
+		shaker = FindObjectOfType<Shaker>();
 		r = GetComponent<Rigidbody>();
 		timer = 0f;
 	}
@@ -52,28 +62,65 @@ public class DamageOnTrigger : MonoBehaviour
 			{
 				Rigidbody r = hit.collider.attachedRigidbody;
 
-				PlatformLife life = other.GetComponent<PlatformLife>();
+				/*PlatformLife life = other.GetComponent<PlatformLife>();
 
 				if(life)
 				{
 					life.ModifLifeValue(-1);
-				}
-
-
-				r.AddForceAtPosition(transform.up * -1f * GetImpactForce(), hit.point);
-				if(destroyOnImpact)
+				}*/
+				//Debug.Log("Avg speed : " + avgSpeed);
+				if(minAvgSpeed > 0f)
 				{
-					Destroy(gameObject);
+					if(avgSpeed >= minAvgSpeed)
+					{
+						if(r) r.AddForceAtPosition(transform.up * -1f * GetImpactForce(), hit.point);
+
+						GameObject particle = Instantiate(spawnedFX, hit.point, Quaternion.identity);
+						particle.transform.up = hit.normal;
+						Destroy(particle, 2f);
+
+
+						//VibrationManager.instance.TriggerVibration(slamSFX, vibrateController);
+						StartCoroutine(Vibrate());
+						timer = 0f;
+
+						if(destroyOnImpact)
+						{
+							Destroy(gameObject);
+						}
+					}
+
 				}
+				else
+				{
+					if (r)
+						r.AddForceAtPosition(transform.up * -1f * GetImpactForce(), hit.point);
 
-				GameObject particle = Instantiate(spawnedFX, hit.point, Quaternion.identity);
-				particle.transform.up = hit.normal;
-				Destroy(particle, 2f);
+					GameObject particle = Instantiate(spawnedFX, hit.point, Quaternion.identity);
+					particle.transform.up = hit.normal;
+					Destroy(particle, 2f);
 
-				timer = 0f;
+
+					//VibrationManager.instance.TriggerVibration(slamSFX, vibrateController);
+					StartCoroutine(Vibrate());
+					timer = 0f;
+
+					if (destroyOnImpact)
+					{
+						Destroy(gameObject);
+					}
+				}
 			}
 			
 		}
+	}
+
+	public IEnumerator Vibrate()
+	{
+		OVRInput.SetControllerVibration(0.3f, 0.3f, vibrateController);
+		yield return new WaitForSeconds(0.3f);
+		OVRInput.SetControllerVibration(0, 0, vibrateController);
+
 	}
 
 	float GetSpeed()
@@ -123,11 +170,14 @@ public class DamageOnTrigger : MonoBehaviour
 	{
 		float velocity = r.velocity.magnitude;
 		float impactForce = Mathf.Clamp(baseAppliedForce, avgSpeed * baseAppliedForce / forceDamp, maxForce);
+
+		if(shaker)shaker.Shake(shakeDuration, impactForce * baseShakeStrength / maxForce);
 		//Debug.Log("Velocity : " + GetSpeed());
 		if (debugLog) Debug.Log("Avg Speed : " + avgSpeed, gameObject);
 		if (debugLog) Debug.Log("Speed : " + speed, gameObject);
 		if (debugLog)Debug.Log("Impact Force : " + impactForce, gameObject);
 		return impactForce;
-	
 	}
+
+	
 }

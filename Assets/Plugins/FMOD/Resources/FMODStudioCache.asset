@@ -51,7 +51,7 @@ MonoBehaviour:
   Path: event:/Step
   guid: c62261d033777b4796b83c5f35471d96
   Banks:
-  - {fileID: -5115637155289592845}
+  - {fileID: 5608345889348423960}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -76,7 +76,7 @@ MonoBehaviour:
   lastModified: 637163717302465026
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &-4754423320699771890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,7 +92,7 @@ MonoBehaviour:
   Path: event:/Crumble
   guid: 616a2385c5785c4caa681c13b0c5fab0
   Banks:
-  - {fileID: -5115637155289592845}
+  - {fileID: 5608345889348423960}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -115,7 +115,7 @@ MonoBehaviour:
   Path: event:/Respawn
   guid: 12d7c1e5098a6f4db0fb26035974f1b7
   Banks:
-  - {fileID: -5115637155289592845}
+  - {fileID: 5608345889348423960}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 1363657734380216389}
-  - {fileID: -5115637155289592845}
+  - {fileID: 5608345889348423960}
   EditorEvents:
   - {fileID: 802230294913871818}
   - {fileID: 3392481440296548269}
@@ -150,10 +150,10 @@ MonoBehaviour:
   - {fileID: -2971553516268373130}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -5115637155289592845}
+  - {fileID: 5608345889348423960}
   StringsBanks:
   - {fileID: 1363657734380216389}
-  stringsBankWriteTime: 637163717302505014
+  stringsBankWriteTime: 637163772358179466
   cacheVersion: 3
 --- !u!114 &415337036048556290
 MonoBehaviour:
@@ -170,7 +170,7 @@ MonoBehaviour:
   Path: event:/Pickup
   guid: fd4591932453d041a5c644500c8ef62c
   Banks:
-  - {fileID: -5115637155289592845}
+  - {fileID: 5608345889348423960}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -193,7 +193,7 @@ MonoBehaviour:
   Path: event:/MainTheme
   guid: 12dbe564129d824b823967dfa3328584
   Banks:
-  - {fileID: -5115637155289592845}
+  - {fileID: 5608345889348423960}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/StreamingAssets/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637163717302505014
+  lastModified: 637163772358179466
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -236,7 +236,7 @@ MonoBehaviour:
   Path: event:/Fall
   guid: b72a09a44b23274ea6fbc738c3c0197a
   Banks:
-  - {fileID: -5115637155289592845}
+  - {fileID: 5608345889348423960}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -259,7 +259,7 @@ MonoBehaviour:
   Path: event:/Slam
   guid: 5cff30dc75d09841ab153b5ea1d4dddc
   Banks:
-  - {fileID: -5115637155289592845}
+  - {fileID: 5608345889348423960}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -285,6 +285,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &5608345889348423960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/StreamingAssets/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637163772358139487
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &7059936970432703305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,7 +318,7 @@ MonoBehaviour:
   Path: event:/Destroy
   guid: dded771aa7ff0544b42c210f3a45dc3d
   Banks:
-  - {fileID: -5115637155289592845}
+  - {fileID: 5608345889348423960}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -323,7 +341,7 @@ MonoBehaviour:
   Path: event:/Building
   guid: 956446bb59b8254aa04cf5f001f15c04
   Banks:
-  - {fileID: -5115637155289592845}
+  - {fileID: 5608345889348423960}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
